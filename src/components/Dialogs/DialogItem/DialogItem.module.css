@@ -1,0 +1,23 @@
+.dialog{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.dialog:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.active{
+    color: yellow;
+}
+.item{
+    color: #fff;
+}
+
+.avatar{
+    background-color: yellow;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}

@@ -1,0 +1,13 @@
+.usersPagination span{
+	cursor: pointer;
+}
+
+.pageNumber{
+	padding: 10px;
+	border: 1px solid grey;
+}
+
+.pageNumber.selectedPage {
+	font-weight: 700;
+	border-color: black;
+}	

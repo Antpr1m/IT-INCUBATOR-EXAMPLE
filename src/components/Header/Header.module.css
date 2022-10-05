@@ -1,0 +1,16 @@
+.header {
+	grid-area: header;
+	background-color: rgb(8, 214, 8);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px
+}
+.header img {
+	width: 50px;
+}
+.headerLoginBlock a {
+	color: #fff;
+}
+
+

@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    justify-content: space-around;
+}
+
+.bodyMessage{
+}
+
+.message{
+    background-color: #fff;
+    padding: 10px 20px;
+    color: #02cbcb;
+    margin-bottom: 20px;
+    border-radius: 25px;
+}

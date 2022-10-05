@@ -1,0 +1,24 @@
+.usersContainer{
+    padding: 20px;
+}
+button{
+    cursor:pointer;
+}
+.usersBody:not(:last-child){
+    margin-bottom: 10px;
+}
+
+.userImage{
+    max-width: 70px;
+}
+.userImage img{
+    width: 100%;
+}
+
+.usersPaginator{
+	margin-bottom: 1rem;
+}
+
+
+
+

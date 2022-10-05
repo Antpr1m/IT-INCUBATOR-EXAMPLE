@@ -1,0 +1,54 @@
+.profile {
+    padding: 10px;
+    display: flex;
+}
+
+.profileImg {
+
+}
+
+.profileImg img {
+
+}
+.profileAbout{
+	background-color: rgb(206, 250, 245);
+	border-radius: 1rem;
+	padding:  1rem 2rem;
+}
+
+.profileStatus {
+	margin-bottom: 1rem;
+}
+
+.profileDescription {
+	display: flex;
+	flex-direction: column;
+}
+
+.descriptionAbout {
+    background-color: #fff;
+    border-radius: 10px;
+    flex: 1 1 100%;
+    margin: 0 20px;
+    text-align: center;
+}
+
+.descriptionTitle {
+    color: #06afaf;
+    font-size: 24px;
+}
+
+.descriptionStatus {
+    font-size: 18px;
+}
+.descriptionName{
+    font-size: 20px;
+}
+
+.profileContacts {
+	padding: 0px 1.5rem;
+}
+
+.profileInputDownload {
+	display: inline-block;
+}

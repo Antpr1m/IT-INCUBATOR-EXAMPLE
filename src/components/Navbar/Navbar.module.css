@@ -1,0 +1,4 @@
+.container{
+    grid-area: nav;
+    background-color: rgb(223, 208, 81);
+}
