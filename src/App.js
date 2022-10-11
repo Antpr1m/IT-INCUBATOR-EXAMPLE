@@ -7,7 +7,7 @@ import Settings from "./components/Settings/Settings";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
-import { initializeApp, unhandleError } from './redux/app-reducer ';
+import { initializeApp } from './redux/app-reducer ';
 import { connect } from 'react-redux';
 import Preloader from './components/common/preloader/Preloader';
 import React, { Suspense } from 'react';
@@ -22,20 +22,19 @@ const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileCo
 class App extends React.Component {
 
 	//Функция для поиска не отловленных ошибок
-	catchAllUnhandledErrors = (reason, promiseRejectionEvent) => {
+	/* catchAllUnhandledErrors = (reason, promiseRejectionEvent) => {
 		const error = "Some error occured"
 		unhandleError(error)
-		//console.error(promiseRejectionEvent);
-	}
+	} */
 
 	componentDidMount() {
 		this.props.initializeApp()
 		// поиск не отловленых ошибок 
-		window.addEventListener("unhandlerejection", this.catchAllUnhandledErrors)
+		// window.addEventListener("unhandlerejection", this.catchAllUnhandledErrors)
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener("unhandlerejection", this.catchAllUnhandledErrors)
+		// window.removeEventListener("unhandlerejection", this.catchAllUnhandledErrors)
 	}
 
 	render() {
@@ -74,8 +73,8 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => ({
 	initialized: state.app.initialized,
-	globalError: state.app.globalError
+	// globalError: state.app.globalError
 })
 
 
-export default connect(mapStateToProps, { initializeApp, unhandleError })(App);
+export default connect(mapStateToProps, { initializeApp,/*  unhandleError  */ })(App);

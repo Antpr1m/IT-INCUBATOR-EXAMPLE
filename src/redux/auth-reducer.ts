@@ -5,15 +5,26 @@ const SET_USER_DATA = 'auth/SET_USER_DATA';
 const GET_CAPTCHA_URL_SUCCESS = 'auth/GET_CAPTCHA_URL_SUCCESS'
 
 
-let initialState = {
-	id: null,
-	email: null,
-	login: null,
+/* export interface InitialStateType {
+	id: number | null,
+	email: string | null,
+	login: string | null,
 	isAuth: false,
-	captchaUrl: null
+	captchaUrl: string | null
+} */
+
+let initialState = {
+	id: null as number | null,
+	email: null as string | null,
+	login: null as string | null,
+	isAuth: false,
+	captchaUrl: null as string | null
 
 }
-const authReducer = (state = initialState, action) => {
+
+export type InitialStateType = typeof initialState
+
+const authReducer = (state = initialState, action: any): InitialStateType => {
 	switch (action.type) {
 		case SET_USER_DATA:
 		case GET_CAPTCHA_URL_SUCCESS:
@@ -27,12 +38,31 @@ const authReducer = (state = initialState, action) => {
 }
 
 
-export const setAuthUserData = (id, email, login, isAuth) => ({ type: SET_USER_DATA, payload: { id, email, login, isAuth } })
-export const setCaptchaUrl = (captchaUrl) => ({ type: GET_CAPTCHA_URL_SUCCESS, payload: { captchaUrl } })
+interface SetAuthDataType {
+	id: number | null
+	email: string | null
+	login: string | null
+	isAuth: boolean
+}
+interface SetAuthUserDataType {
+	type: typeof SET_USER_DATA
+	payload: SetAuthDataType
+}
+
+//Action creators
+export const setAuthUserData = (id: number | null, email: string | null, login: string | null, isAuth: boolean): SetAuthUserDataType => ({
+	type: SET_USER_DATA, payload: { id, email, login, isAuth }
+})
+
+interface setCaptchaType {
+	type: typeof GET_CAPTCHA_URL_SUCCESS
+	payload: { captchaUrl: string }
+}
+export const setCaptchaUrl = (captchaUrl: string): setCaptchaType => ({ type: GET_CAPTCHA_URL_SUCCESS, payload: { captchaUrl } })
 
 
 //Thunks(санки)
-export const getAuthUserData = () => async (dispatch) => {
+export const getAuthUserData = () => async (dispatch: any) => {
 	let response = await authAPI.authMe()
 
 	if (response.data.resultCode === 0) {
@@ -41,7 +71,7 @@ export const getAuthUserData = () => async (dispatch) => {
 	}
 }
 
-export const login = (email, password, rememberMe, captcha) => async (dispatch) => {
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string) => async (dispatch: any) => {
 	let response = await authAPI.login(email, password, rememberMe, captcha)
 
 	if (response.data.resultCode === 0) {
@@ -59,7 +89,7 @@ export const login = (email, password, rememberMe, captcha) => async (dispatch) 
 	}
 }
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async (dispatch: any) => {
 	let response = await authAPI.logout()
 
 	if (response.data.resultCode === 0) {
@@ -68,7 +98,7 @@ export const logout = () => async (dispatch) => {
 }
 
 
-export const getCaptchaUrl = () => async (dispatch) => {
+export const getCaptchaUrl = () => async (dispatch: any) => {
 	const response = await securityAPI.getCaptchaUrl()
 	const captcha = response.data.url
 
