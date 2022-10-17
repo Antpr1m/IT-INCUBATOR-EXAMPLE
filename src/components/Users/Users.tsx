@@ -1,10 +1,22 @@
 import style from "./Users.module.css";
-import React from "react";
+import React, { FC } from "react";
 import Paginator from "../common/Paginator/Paginator";
 import User from "./User";
+import { UserType } from "../../types/types";
 
 
-const Users = ({ currentPage, totalItemsCount, pageSize, onPageChanged, users, ...props }) => {
+type PropsType = {
+	currentPage: number
+	totalItemsCount: number
+	pageSize: number
+	onPageChanged: (pageNumber: number) => void
+	users: Array<UserType>
+	followingInProgress: Array<number>
+	follow: (userId: number) => void
+	unfollow: (userId: number) => void
+}
+
+const Users: FC<PropsType> = ({ currentPage, totalItemsCount, pageSize, onPageChanged, users, ...props }) => {
 
 	return (
 		<div className={style.usersContainer}>
