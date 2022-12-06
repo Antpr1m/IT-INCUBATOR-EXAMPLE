@@ -1,22 +1,26 @@
+import { ThunkAction } from "redux-thunk";
 import { getAuthUserData } from "./auth-reducer";
+import { AppStateType, InferActionsTypes } from "./redux-store";
 
-const SET_INITIALIZED = 'app/SET_INITIALIZED';
+// При автоматическом выведении типа из action creators можно не создавать константы с типами 
+//const SET_INITIALIZED = 'APP/SET_INITIALIZED';
 // const SET_GLOBAL_ERROR = 'app/SET_GLOBAL_ERROR';
 
 
-export interface InitialStateType {
-	initialized: boolean
-}
 
-
-let initialState: InitialStateType = {
+let initialState = {
 	initialized: false
 }
 
+type InitialStateType = typeof initialState
+
+//Автоматическое выведение типов из action creators
+type ActionsType = InferActionsTypes<typeof actions>
+
 //Функция возвращает InitialStateType
-const appReducer = (state = initialState, action: any): InitialStateType => {
+const appReducer = (state = initialState, action: ActionsType): InitialStateType => {
 	switch (action.type) {
-		case SET_INITIALIZED:
+		case 'APP/SET_INITIALIZED':
 			return {
 				...state,
 				initialized: true
@@ -28,21 +32,20 @@ const appReducer = (state = initialState, action: any): InitialStateType => {
 	}
 }
 
-//Types for actions
-interface InitializedSuccessActionType {
-	type: typeof SET_INITIALIZED
+
+
+export const actions = {
+	initializingSuccess: () => ({ type: 'APP/SET_INITIALIZED' } as const)
 }
 
-export const initializingSuccess = (): InitializedSuccessActionType => ({ type: SET_INITIALIZED })
-// export const setGlobalError = (globalError) => ({ type: SET_GLOBAL_ERROR, payload: globalError })
 
 
 //Thunks(санки)
 export const initializeApp = () => (dispatch: any) => {
-	let promise = dispatch(getAuthUserData)
+	let promise = dispatch(getAuthUserData())
 	Promise.all([promise])
 		.then(() => {
-			dispatch(initializingSuccess)
+			dispatch(actions.initializingSuccess)
 		})
 }
 

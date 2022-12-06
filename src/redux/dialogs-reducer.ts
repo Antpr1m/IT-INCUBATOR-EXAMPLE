@@ -1,4 +1,7 @@
-const SEND_MESSAGE = 'SEND-MESSAGE';
+import { ThunkAction } from "redux-thunk";
+import { AppStateType, InferActionsTypes } from "./redux-store";
+
+const SEND_MESSAGE = 'dialogs/SEND-MESSAGE';
 
 interface DialogType {
 	id: number
@@ -31,8 +34,9 @@ let initialState = {
 }
 
 export type InitialStateType = typeof initialState
+type ActionsType = InferActionsTypes<typeof actions>
 
-const dialogsReducer = (state = initialState, action: any): InitialStateType => {
+const dialogsReducer = (state = initialState, action: ActionsType): InitialStateType => {
 
 	switch (action.type) {
 		case SEND_MESSAGE:
@@ -46,11 +50,14 @@ const dialogsReducer = (state = initialState, action: any): InitialStateType => 
 	}
 }
 
-type sendMessageCreatorActionType = {
-	type: typeof SEND_MESSAGE
-	messageText: string
+// Type for all actions
+export const actions = {
+	sendMessageCreator: (messageText: string) => ({ type: SEND_MESSAGE, messageText } as const)
 }
 
-export const sendMessageCreator = (messageText: string): sendMessageCreatorActionType => ({ type: SEND_MESSAGE, messageText })
+
+//Thunk type
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsType> // Not needed yet
+
 
 export default dialogsReducer;

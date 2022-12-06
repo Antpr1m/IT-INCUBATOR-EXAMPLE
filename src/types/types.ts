@@ -33,5 +33,14 @@ export interface UserType {
 	id: number
 	name: string
 	status: string
-	photos: PhotosType
+	photos: PhotosType,
+	followed: boolean
 }
+
+export enum ResultCodesEnum {
+	Success = 0,
+	Error = 1,
+	captchaIsRequired = 10
+}
+
+//API types
